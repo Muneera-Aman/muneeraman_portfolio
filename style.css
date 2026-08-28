@@ -1443,26 +1443,36 @@ button {
 
 
     /* FOOTER */
-
-    .footer {
-        padding-top: 60px;
-    }
+@media (max-width: 600px) {
 
     .footer-top {
-        grid-template-columns: 1fr;
-
-        gap: 40px;
-
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 25px;
         padding-bottom: 50px;
     }
 
-    .footer-bottom {
-        flex-direction: column;
-
-        gap: 10px;
+    /* Logo + description takes full width */
+    .footer-top > div:first-child {
+        grid-column: 1 / -1;
     }
-}
 
+    /* Footer navigation */
+    .footer-links {
+        grid-column: 1;
+    }
+
+    /* Social links */
+    .social-links {
+        grid-column: 2;
+    }
+
+    .footer-links,
+    .social-links {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+}}
 
 /* =========================================================
    EXTRA SMALL DEVICES
