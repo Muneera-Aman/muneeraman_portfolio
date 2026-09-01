@@ -1,10 +1,14 @@
-/* =================MOBILE MENU=================== */
+/* ================= MOBILE MENU ================= */
 
 const menuToggle = document.querySelector(".saas-menu");
 const navLinks = document.querySelector(".saas-nav-links");
 
-if (menuToggle && navLinks) {
+const navigationLinks = navLinks
+    ? navLinks.querySelectorAll("a")
+    : [];
 
+
+if (menuToggle && navLinks) {
     menuToggle.addEventListener("click", () => {
         const isOpen = navLinks.classList.toggle("open");
 
@@ -17,11 +21,7 @@ if (menuToggle && navLinks) {
 
 
     /* Navigation links */
-
-    const navigationLinks = navLinks.querySelectorAll("a");
-
     navigationLinks.forEach(link => {
-
         link.addEventListener("click", () => {
 
             // Remove active from all links
@@ -38,33 +38,29 @@ if (menuToggle && navLinks) {
 
             // Update accessibility
             menuToggle.setAttribute("aria-expanded", "false");
-
         });
-
     });
 
 
     /* Close menu when clicking outside */
-
     document.addEventListener("click", (event) => {
-
         if (
             !navLinks.contains(event.target) &&
             !menuToggle.contains(event.target)
         ) {
+
             navLinks.classList.remove("open");
             menuToggle.classList.remove("active");
 
             menuToggle.setAttribute("aria-expanded", "false");
+
         }
 
     });
 
 
     /* Close menu when pressing Escape */
-
     document.addEventListener("keydown", (event) => {
-
         if (event.key === "Escape") {
 
             navLinks.classList.remove("open");
@@ -73,26 +69,21 @@ if (menuToggle && navLinks) {
             menuToggle.setAttribute("aria-expanded", "false");
 
         }
-
     });
-
 }
 
 
-/* ============HEADER SCROLL EFFECT===================== */
+/* ================= HEADER SCROLL EFFECT ================= */
 
 const header = document.querySelector(".saas-header");
-
 if (header) {
-
     const updateHeader = () => {
-
         if (window.scrollY > 50) {
             header.classList.add("scrolled");
         } else {
             header.classList.remove("scrolled");
-        }
 
+        }
     };
 
     // Run once when page loads
@@ -100,6 +91,40 @@ if (header) {
 
     // Update while scrolling
     window.addEventListener("scroll", updateHeader, {
+        passive: true
+    });
+}
+
+
+/* ================= ACTIVE SECTION ON SCROLL ================= */
+
+const sections = document.querySelectorAll("section[id]");
+if (sections.length > 0 && navigationLinks.length > 0) {
+    const updateActiveSection = () => {
+        let currentSection = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                currentSection = section.getAttribute("id");
+            }
+        });
+
+        navigationLinks.forEach(link => {
+            link.classList.remove("active");
+            const linkTarget = link.getAttribute("href");
+            if (linkTarget === `#${currentSection}`) {
+                link.classList.add("active");
+
+            }
+        });
+    };
+
+
+    // Run once when page loads
+    updateActiveSection();
+
+    // Update while scrolling
+    window.addEventListener("scroll", updateActiveSection, {
         passive: true
     });
 
