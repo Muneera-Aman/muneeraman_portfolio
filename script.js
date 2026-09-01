@@ -72,30 +72,6 @@ if (menuToggle && navLinks) {
     });
 }
 
-
-/* ================= HEADER SCROLL EFFECT ================= */
-
-const header = document.querySelector(".saas-header");
-if (header) {
-    const updateHeader = () => {
-        if (window.scrollY > 50) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-
-        }
-    };
-
-    // Run once when page loads
-    updateHeader();
-
-    // Update while scrolling
-    window.addEventListener("scroll", updateHeader, {
-        passive: true
-    });
-}
-
-
 /* ================= ACTIVE SECTION ON SCROLL ================= */
 
 const sections = document.querySelectorAll("section[id]");
