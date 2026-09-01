@@ -1,6 +1,4 @@
-/* =========================================
-   MOBILE MENU
-========================================= */
+/* =================MOBILE MENU=================== */
 
 const menuToggle = document.querySelector(".saas-menu");
 const navLinks = document.querySelector(".saas-nav-links");
@@ -81,9 +79,7 @@ if (menuToggle && navLinks) {
 }
 
 
-/* =========================================
-   HEADER SCROLL EFFECT
-========================================= */
+/* ============HEADER SCROLL EFFECT===================== */
 
 const header = document.querySelector(".saas-header");
 
